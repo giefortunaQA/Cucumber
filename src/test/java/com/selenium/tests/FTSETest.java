@@ -1,6 +1,6 @@
 package com.selenium.tests;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertEquals;
 
 import java.util.HashMap;
 import java.util.List;
@@ -16,8 +16,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
-
-public class ShoppingTest {
+public class FTSETest {
 	private WebDriver driver;
 	public static ChromeOptions chromeCfg() {
 		 Map<String, Object> prefs = new HashMap<String, Object>();
@@ -43,16 +42,23 @@ public class ShoppingTest {
 	
 
 	
-	@Test //testing all results have keyword Dress
-	public void testDressResults() {
-		driver.get("http://automationpractice.com/index.php");
-		WebElement results= driver.findElement(By.xpath("//*[@id=\"center_column\"]/ul"));
-		List<WebElement> images= results.findElements(By.tagName("img"));
-		for (WebElement image:images) {
-			assertTrue(image.getAttribute("title").contains("Dress"));
-		}
+	@Test
+	public void testRiser() {
+		driver.get("https://www.hl.co.uk/shares/stock-market-summary/ftse-100/risers");
+		List<WebElement> risers= driver.findElements(By.xpath("/html/body/main/div/div/div[3]/div[4]/div[1]/div[2]/table/tbody/tr"));
+
+		WebElement first=risers.get(0);
+		assertEquals("ls-row-WTB-L",first.getAttribute("id"));
 	}
 	
+	
+	@Test
+	public void testFaller() {
+		driver.get("https://www.hl.co.uk/shares/stock-market-summary/ftse-100/fallers");
+		List<WebElement> fallers= driver.findElements(By.xpath("/html/body/main/div/div/div[3]/div[4]/div[1]/div[2]/table/tbody/tr"));
+		WebElement first=fallers.get(0);
+		assertEquals("ls-row-JET-L",first.getAttribute("id"));
+	}
 	
 	@After
 	public void close() {
