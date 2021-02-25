@@ -6,11 +6,8 @@ import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
-import io.cucumber.java.After;
-import io.cucumber.java.Before;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -18,18 +15,9 @@ import io.cucumber.java.en.When;
 public class ShoppingStepDef {
 	private static RemoteWebDriver driver;
 	
-	@Before
-	public void setup() {
-		System.setProperty("webdriver.chrome.driver", "src/test/resources/driver/chromedriver.exe");
-		driver = new ChromeDriver();
-		driver.manage().window().maximize();;
-	}
-	@After
-	public void close() {
-		driver.quit();
-	}
 	@Given("I have access to the website")
 	public void i_have_access_to_the_website() {
+		driver=SeleniumDriver.getDriver();
 		driver.get("http://automationpractice.com/index.php");
 	}
 

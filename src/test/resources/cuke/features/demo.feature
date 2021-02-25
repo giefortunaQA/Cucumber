@@ -1,4 +1,4 @@
-
+@ignore
 Feature: Demo site tests
 
   Scenario: Sign up and log in 

@@ -1,4 +1,4 @@
-
+@ignore
 Feature: Mercury Tours sign up and log in
 
   Scenario: Creating an account and logging in

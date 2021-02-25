@@ -7,7 +7,9 @@ import io.cucumber.junit.CucumberOptions;
 
 
 @RunWith(Cucumber.class)
-@CucumberOptions(features="src/test/resources/com/qa/cuke/features",strict=true)
+@CucumberOptions(features="src/test/resources/cuke/features",
+	tags="not @ignore",
+	strict=true)
 public class CukeRunner {
 
 }
