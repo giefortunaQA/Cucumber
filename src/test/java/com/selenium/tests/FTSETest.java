@@ -1,14 +1,15 @@
 package com.selenium.tests;
 
-import static org.junit.Assert.assertEquals;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
@@ -33,7 +34,7 @@ public class FTSETest {
 		 return cOptions;
 		 }
 	
-	@Before
+	@BeforeEach
 	public void setup() {
 		System.setProperty("webdriver.chrome.driver", "src/test/resources/driver/chromedriver.exe");
 		driver=new ChromeDriver(chromeCfg());
@@ -48,7 +49,7 @@ public class FTSETest {
 		List<WebElement> risers= driver.findElements(By.xpath("/html/body/main/div/div/div[3]/div[4]/div[1]/div[2]/table/tbody/tr"));
 
 		WebElement first=risers.get(0);
-		assertEquals("ls-row-WTB-L",first.getAttribute("id"));
+		assertEquals("ls-row-ANTO-L",first.getAttribute("id"));
 	}
 	
 	
@@ -57,11 +58,12 @@ public class FTSETest {
 		driver.get("https://www.hl.co.uk/shares/stock-market-summary/ftse-100/fallers");
 		List<WebElement> fallers= driver.findElements(By.xpath("/html/body/main/div/div/div[3]/div[4]/div[1]/div[2]/table/tbody/tr"));
 		WebElement first=fallers.get(0);
-		assertEquals("ls-row-JET-L",first.getAttribute("id"));
+		assertEquals("ls-row-EXPN-L",first.getAttribute("id"));
 	}
 	
-	@After
+	@AfterEach
 	public void close() {
+		driver.close();
 		driver.quit();
 	}
 

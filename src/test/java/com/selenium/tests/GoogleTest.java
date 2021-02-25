@@ -1,15 +1,17 @@
 package com.selenium.tests;
-import static org.junit.Assert.assertEquals;
+
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
@@ -31,23 +33,26 @@ public class GoogleTest {
 		 return cOptions;
 		 }
 	
-	@Before
-	public void setup() {
+	@BeforeEach
+	public void setup() throws InterruptedException {
 		System.setProperty("webdriver.chrome.driver", "src/test/resources/driver/chromedriver.exe");
-		driver=new ChromeDriver(chromeCfg());
+		driver=new ChromeDriver();
+		Thread.sleep(3000);
 		driver.manage().window().setSize(new Dimension(1366,768));
 	}
 	
 
 	
 	@Test
-	public void testKittenTitle() {
+	public void testKittenTitle(){
 		driver.get("https://www.google.com");
-		driver.findElement(By.xpath("/html/body/div[1]/div[3]/form/div[2]/div[1]/div[1]/div/div[2]/input")).sendKeys("Kitten\n");
-		assertEquals("Kitten - Google Search", driver.getTitle());
+//		driver.findElement(By.id("readAllBtn")).click();
+//		WebElement result =driver.findElement(By.id("displayDivRead"));
+//		boolean contains=result.isDisplayed();
+		assertTrue(driver.getTitle().equals("Google"));
 	}
 	
-	@After
+	@AfterEach
 	public void close() {
 		driver.quit();
 	}
