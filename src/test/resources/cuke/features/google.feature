@@ -1,4 +1,4 @@
-@ignore
+
 Feature: Google search terms
 
   Scenario Outline: Google "<Animal>"

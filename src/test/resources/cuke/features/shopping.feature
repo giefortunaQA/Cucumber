@@ -1,4 +1,4 @@
-@ignore
+
 Feature: Exploring Shopping Web Site
 
   Scenario: Searching for a dress in the website
