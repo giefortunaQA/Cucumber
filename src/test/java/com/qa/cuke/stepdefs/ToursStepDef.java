@@ -1,50 +1,48 @@
 package com.qa.cuke.stepdefs;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebDriver;
+import org.openqa.selenium.support.PageFactory;
 
-import io.cucumber.java.en.And;
+import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
 public class ToursStepDef {
-private static RemoteWebDriver driver;
-	
+	private static RemoteWebDriver driver;
+	private ToursPage page;
+
 	@Given("I have access to mercury tours website")
 	public void i_hac_ve_access_to_mercury_tours_website() {
-		driver=SeleniumDriver.getDriver();				
-	    driver.get("http://demo.guru99.com/test/newtours/");
+		driver = SeleniumDriver.getDriver();
+		page = PageFactory.initElements(driver, ToursPage.class);
+		driver.get(ToursPage.URL);
 	}
 
 	@When("I click the register button")
 	public void i_click_the_register_button() {
-		driver.findElement(By.xpath("/html/body/div[2]/table/tbody/tr/td[2]/table/tbody/tr[2]/td/table/tbody/tr/td[2]/a")).click();
+		page.goToRegister();
 	}
 
-	@And("I input my details and submit")
-	public void i_input_my_details_and_submit() {
-	    driver.findElement(By.xpath("/html/body/div[2]/table/tbody/tr/td[2]/table/tbody/tr[4]/td/table/tbody/tr/td[2]/table/tbody/tr[5]/td/form/table/tbody/tr[2]/td[2]/input"))
-	    .sendKeys("Gie\tFortuna\t01111111111\tgf@qa.com\tSome Adress\tSome City\tSome State\tP0STC0D3\tPHIL\tgfqatrainee\tpassword123\tpassword123\t\n");
+	@When("I input my details and submit:")
+	public void i_input_my_details_and_submit(DataTable dataTable) {
+		page.register(driver, dataTable);
 	}
+
 	@When("I go to the sign in page")
 	public void i_go_to_the_sign_in_page() {
-		driver.get("http://demo.guru99.com/test/newtours/");
+		page.goToLogin();
 	}
 
-	@And("I use the same details to sign in")
-	public void i_use_the_same_details_to_sign_in() {
-	   driver.findElement(By.xpath("/html/body/div[2]/table/tbody/tr/td[2]/table/tbody/tr[4]/td/table/tbody/tr/td[2]/table/tbody/tr[2]/td[3]/form/table/tbody/tr[4]/td/table/tbody/tr[2]/td[2]/input"))
-	   .sendKeys("gfqatrainee\tpassword123\t\n");
+	@When("I use the {string} and {string} to login")
+	public void i_use_the_and_to_login(String string, String string2) {
+		page.login(string, string2);
 	}
 
 	@Then("I should see a successful login message")
 	public void i_should_see_a_successful_login_message() {
-		WebElement result=driver.findElement(By.xpath("/html/body/div[2]/table/tbody/tr/td[2]/table/tbody/tr[4]/td/table/tbody/tr/td[2]/table/tbody/tr[1]/td/h3"));
-	    assertTrue(result.getText().contains("Login Successfully"));
+		page.verifyResult();
+
 	}
 
 }

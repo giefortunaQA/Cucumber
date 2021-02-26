@@ -1,4 +1,4 @@
-
+@ignore
 Feature: Exploring Hargreaves Lansdown
 
   Scenario Outline: Finding top "<category>"
@@ -8,5 +8,9 @@ Feature: Exploring Hargreaves Lansdown
     
    Examples:
    |category|top|
-   |risers|SMDS|
-   |fallers|HIK|
+   |risers|IAG|
+   
+   @ignore
+   Examples:
+   |category|top|
+   |fallers|RMV|
