@@ -24,8 +24,9 @@ Feature: Google search terms
  ```
  
  As we run this feature file "as Cucumber", step definitions are generated in the console. We simply copy and paste them and provide the corresponding logic/assertions needed to realise each stage.
-<--StepDefExample-->
+
 ```
+<--StepDefExample-->
 	@Given("I can access google.com")
 	public void i_can_access_google_com() {
     //logic here
